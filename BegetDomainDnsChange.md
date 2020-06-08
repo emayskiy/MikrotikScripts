@@ -1,10 +1,11 @@
 # Обновление настроек домена, расположенного на хостинге Beget
-Скрипт для микротик, выполняющий проверку внешнего IP устройства Микротик и изменение ip-адреса домена, распложенного на хостинге Beget.
+Скрипт для микротик, выполняющий проверку внешнего IP-адреса устройства Микротик и изменение настроек днс домена, распложенного на хостинге Beget.
 
 Использутеся метод API changeRecords: https://beget.com/ru/api/dns#changeRecords
 
 Для работы необходимо изменить учетные данные в настройках скрипта и добавить запуск в планировщик задач микротик. 
-У API есть одна особенность: нельзя изменить только один тип записи ДНС. При вызове метода в настройках ДНС домена удаляются все типы записи и добавляются только те, которые передали в параметрах. Поэтому нужно обязательно передавать все типы записей: A, MX, TXT.
+
+> У API есть одна особенность: нельзя изменить только один тип записи ДНС. При вызове метода в настройках ДНС домена удаляются все типы записи и добавляются только те, которые передали в параметрах. Поэтому нужно обязательно передавать все типы записей: A, MX, TXT.
 
 ```
 #Main script settings
@@ -30,7 +31,6 @@
      :log info "BEGET: $begetDomain DNS IP: $domainCurrentIP"
      :log info "BEGET: Current extern IP: $aRecord"     
 	 :local updateDnsUrl "https://api.beget.com/api/dns/changeRecords?login=$begetUser&passwd=$begetPassword&input_format=json&output_format=json&input_data={\"fqdn\":\"$begetDomain\",\"records\":{\"A\":[{\"priority\":10,\"value\":\"$aRecord\"}],\"MX\":[{\"priority\":10,\"value\":\"$mx10Record\"},{\"priority\":20,\"value\":\"$mx20Record\"}],\"TXT\":[{\"priority\":10,\"value\":\"$txtRecord\"}]}}";
-     :log info "BEGET: $updateDnsUrl "
      /tool fetch url=$updateDnsUrl dst-path="/BEGET_ChangeIPResult.txt";
      delay 1
      :local upresult [/file get BEGET_ChangeIPResult.txt contents] 
