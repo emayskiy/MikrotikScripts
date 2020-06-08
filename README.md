@@ -3,6 +3,6 @@
 
 1. [Обновление настроек домена, расположенного на хостинге Beget](BegetDomainDnsChange.md)
 
-Найденные интересные ссылки: 
-[Скрипт для блокировки рекламы](https://github.com/tarampampam/mikrotik-hosts-parser)
+Посмотреть: 
+[Mikrotik StopAD](https://github.com/tarampampam/mikrotik-hosts-parser)
 
