@@ -13,6 +13,7 @@
 :local begetDomain "domain.ru"
 :local begetUser "user"		
 :local begetPassword "pass"
+:local dDNSInterfaceName "WanInterfaceName"
 
 # Default domain records
 #-----------------------------------------------------------------------------------
@@ -24,8 +25,14 @@
 # Get current Domain DNS and Extern IP for A-record
 #-----------------------------------------------------------------------------------
 :local domainCurrentIP [:resolve "$begetDomain"]
-/tool fetch url="http://ident.me" dst-path="/BEGET_MyExternIP.txt";
-:local aRecord [/file get BEGET_MyExternIP.txt contents]
+
+# Получение внешнего IP исползуя сервис ident.me
+#/tool fetch url="http://ident.me" dst-path="/BEGET_MyExternIP.txt";
+#:local aRecord [/file get BEGET_MyExternIP.txt contents]
+
+# Получение внешнего IP из настроек Asterisk (Если на роутере несколько провайдеров)
+:local aRecord [ /ip address get [/ip address find interface=$dDNSInterfaceName ] address ] 
+:local aRecord [:pick $aRecord 0 [:find $aRecord "/"]]
 # Change domain settings
 :if ($aRecord != $domainCurrentIP) do={
      :log info "BEGET: $begetDomain DNS IP: $domainCurrentIP"
