@@ -5,6 +5,6 @@
 1. [Обновление настроек домена, расположенного на хостинге Beget](BegetDomainDnsChange.md)
 
 Посмотреть: 
-[Mikrotik StopAD](https://github.com/tarampampam/mikrotik-hosts-parser)
-[RouterOS Backup Tools](https://github.com/BigNerd95/RouterOS-Backup-Tools)
+1. [Mikrotik StopAD](https://github.com/tarampampam/mikrotik-hosts-parser)
+1. [RouterOS Backup Tools](https://github.com/BigNerd95/RouterOS-Backup-Tools)
 
